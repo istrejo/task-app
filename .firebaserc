@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "task-app-dd60d": {
+      "hosting": {
+        "app": [
+          "task-app-dd60d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "task-app-dd60d"
+  }
+}
