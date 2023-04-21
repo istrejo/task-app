@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../../models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,11 +9,40 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  constructor(private firebaseSvc: FirebaseService) {}
+  user = {} as User;
+
+  constructor(
+    private firebaseSvc: FirebaseService,
+    private utilsSvc: UtilsService
+  ) {}
 
   ngOnInit() {}
 
+  ionViewWillEnter() {
+    this.getUser();
+  }
+
+  getUser() {
+    return (this.user = this.utilsSvc.getElementFromLocalstorage('user'));
+  }
+
   signOut() {
-    this.firebaseSvc.signOut();
+    this.utilsSvc.presentAlert({
+      header: 'Cerrar Sesión!',
+      message: '¿Quieres cerrar sesión?',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Sí, cerrar',
+          handler: () => {
+            this.firebaseSvc.signOut();
+          },
+        },
+      ],
+    });
   }
 }

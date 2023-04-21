@@ -16,6 +16,11 @@ const routes: Routes = [
       import('./pages/tabs/tabs.module').then((m) => m.TabsPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
