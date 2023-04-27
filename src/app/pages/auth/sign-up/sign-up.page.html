@@ -6,11 +6,23 @@
 
   <div class="content">
     <div class="d-flex-center">
-      <form (keyup.enter)="submit()" class="ion-text-center" [formGroup]="form" (ngSubmit)="submit()">
-
-        <app-custom-input autocomplete="name" [control]="form.get('name')" type="text" label="Nombre"
-          icon="person-outline"></app-custom-input>
-        <div class="validators" *ngIf="form.get('name').errors && form.get('name').dirty">
+      <form
+        (keyup.enter)="submit()"
+        class="ion-text-center"
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+      >
+        <app-custom-input
+          autocomplete="name"
+          [control]="form.get('name')"
+          type="text"
+          label="Nombre"
+          icon="person-outline"
+        ></app-custom-input>
+        <div
+          class="validators"
+          *ngIf="form.get('name').errors && form.get('name').dirty"
+        >
           <div *ngIf="form.get('name').errors?.['required']">
             Ingresa tu nombre
           </div>
@@ -19,9 +31,17 @@
           </div>
         </div>
 
-        <app-custom-input autocomplete="email" [control]="form.get('email')" type="email" label="Correo"
-          icon="mail-outline"></app-custom-input>
-        <div class="validators" *ngIf="form.get('email').errors && form.get('email').dirty">
+        <app-custom-input
+          autocomplete="email"
+          [control]="form.get('email')"
+          type="email"
+          label="Correo"
+          icon="mail-outline"
+        ></app-custom-input>
+        <div
+          class="validators"
+          *ngIf="form.get('email').errors && form.get('email').dirty"
+        >
           <div *ngIf="form.get('email').errors?.['required']">
             Ingresa tu correo
           </div>
@@ -30,17 +50,31 @@
           </div>
         </div>
 
-        <app-custom-input [control]="form.get('password')" type="password" label="Contraseña"
-          icon="lock-closed-outline"></app-custom-input>
-        <div class="validators" *ngIf="form.get('password').errors && form.get('password').dirty">
+        <app-custom-input
+          [control]="form.get('password')"
+          type="password"
+          label="Contraseña"
+          icon="lock-closed-outline"
+        ></app-custom-input>
+        <div
+          class="validators"
+          *ngIf="form.get('password').errors && form.get('password').dirty"
+        >
           <div *ngIf="form.get('password').errors?.['required']">
             Ingresa tu contraseña
           </div>
         </div>
 
-        <app-custom-input [control]="form.get('confirmPassword')" type="password" label="Password"
-          icon="checkmark-circle-outline"></app-custom-input>
-        <div class="validators" *ngIf="form.get('confirmPassword').errors && form.get('confirmPassword').dirty">
+        <app-custom-input
+          [control]="form.get('confirmPassword')"
+          type="password"
+          label="Password"
+          icon="checkmark-circle-outline"
+        ></app-custom-input>
+        <div
+          class="validators"
+          *ngIf="form.get('confirmPassword').errors && form.get('confirmPassword').dirty"
+        >
           <div *ngIf="form.get('confirmPassword').errors?.['required']">
             Este campo es obligatorio
           </div>
@@ -49,7 +83,12 @@
           </div>
         </div>
 
-        <ion-button class="ion-margin-vertical" [disabled]="form.invalid" type="submit" shape="round">
+        <ion-button
+          class="ion-margin-vertical"
+          [disabled]="form.invalid"
+          type="submit"
+          shape="round"
+        >
           Regístrame
           <ion-icon slot="end" name="log-in-outline"></ion-icon>
         </ion-button>

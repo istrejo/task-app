@@ -6,8 +6,15 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { AddUpdateTaskComponent } from './components/add-update-task/add-update-task.component';
 
-const components = [HeaderComponent, CustomInputComponent, LogoComponent];
+const components = [
+  HeaderComponent,
+  CustomInputComponent,
+  LogoComponent,
+  AddUpdateTaskComponent,
+];
 
 @NgModule({
   declarations: [...components],
@@ -17,7 +24,16 @@ const components = [HeaderComponent, CustomInputComponent, LogoComponent];
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: '#78C000',
+      innerStrokeColor: '#C7E596',
+      animationDuration: 300,
+    }),
   ],
-  exports: [...components],
+  exports: [...components, NgCircleProgressModule],
 })
 export class SharedModule {}

@@ -38,4 +38,25 @@ export class FirebaseService {
     this.utilsSvc.routerLink('/auth');
     localStorage.removeItem('user');
   }
+
+  // ========= Firestore (Base de Datos) ==========
+
+  getSubcollection(path: string, subcollectionName: string) {
+    return this.db
+      .doc(path)
+      .collection(subcollectionName)
+      .valueChanges({ idField: 'id' });
+  }
+
+  addToSubcollection(path: string, subcollectionName: string, object: any) {
+    return this.db.doc(path).collection(subcollectionName).add(object);
+  }
+
+  updateDocument(path: string, object: any) {
+    return this.db.doc(path).update(object);
+  }
+
+  deleteDocument(path: string) {
+    return this.db.doc(path).delete();
+  }
 }

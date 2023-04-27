@@ -23,7 +23,7 @@ export class ProfilePage implements OnInit {
   }
 
   getUser() {
-    return (this.user = this.utilsSvc.getElementFromLocalstorage('user'));
+    this.user = this.utilsSvc.getElementFromLocalstorage('user');
   }
 
   signOut() {

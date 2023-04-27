@@ -1,0 +1,101 @@
+<ion-content color="light">
+  <app-header
+    color="light"
+    [centerTitle]="false"
+    [isModal]="true"
+    [title]="task ? 'Tarea' : 'Nueva Tarea'"
+    [toggleTheme]="false"
+  ></app-header>
+
+  <app-custom-input
+    [control]="form.get('title')"
+    type="text"
+    label="Título"
+  ></app-custom-input>
+  <div
+    class="validators"
+    *ngIf="form.get('title').errors && form.get('title').dirty"
+  >
+    <div *ngIf="form.get('title').errors?.['required']">
+      Este campo es obligatorio
+    </div>
+    <div *ngIf="form.get('title').errors?.['minlength']">
+      Este campo require al menos 4 caracteres
+    </div>
+  </div>
+
+  <app-custom-input
+    [control]="form.get('description')"
+    type="textarea"
+    label="Descripción"
+  ></app-custom-input>
+  <div
+    class="validators"
+    *ngIf="form.get('description').errors && form.get('description').dirty"
+  >
+    <div *ngIf="form.get('description').errors?.['required']">
+      Este campo es obligatorio
+    </div>
+    <div *ngIf="form.get('description').errors?.['minlength']">
+      Este campo require al menos 4 caracteres
+    </div>
+  </div>
+
+  <ion-item class="item-header" lines="none">
+    <ion-label>Actividades</ion-label>
+    <span slot="end" *ngIf="form.value.items.length">
+      Progreso: {{ getPercentage() }}%
+    </span>
+    <ion-button (click)="createItem()" slot="end" mode="ios">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <!-- <ion-range [value]="getPercentage()"> </ion-range> -->
+  <ion-progress-bar
+    [value]="getPercentage() / 100"
+    color="success"
+  ></ion-progress-bar>
+
+  <ion-list>
+    <!-- The reorder gesture is disabled by default, enable it to drag and drop items -->
+    <!-- Casting $event to $any is a temporary fix for this bug https://github.com/ionic-team/ionic-framework/issues/24245 -->
+    <ion-reorder-group
+      [disabled]="false"
+      (ionItemReorder)="handleReorder($any($event))"
+    >
+      <div *ngFor="let item of form.value.items; index as i">
+        <ion-item lines="none">
+          <ion-checkbox
+            slot="start"
+            color="success"
+            [(ngModel)]="item.completed"
+          ></ion-checkbox>
+          <ion-label class="ion-text-wrap"> {{ item.name }} </ion-label>
+          <ion-buttons slot="end">
+            <ion-button (click)="removeItem(i)">
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+
+        <ion-item class="item-reorder">
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+      </div>
+    </ion-reorder-group>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <div class="ion-text-center">
+    <ion-button
+      [disabled]="form.invalid"
+      class="ion-margin"
+      mode="ios"
+      (click)="submit()"
+      shape="round"
+    >
+      {{ task ? "Guardar cambios" : "Crear Tarea" }}</ion-button
+    >
+  </div>
+</ion-footer>
